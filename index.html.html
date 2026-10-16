@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOHD ARSH — Smart Question Paper Maker</title>
+<style>
+:root{--bg:#09111f;--panel:rgba(255,255,255,.075);--line:rgba(255,255,255,.14);--text:#eef4ff;--muted:#a8b6ce;--accent:#8b7cff;--cyan:#63d9ed;--shadow:0 22px 60px rgba(0,0,0,.28)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial;background:radial-gradient(ellipse at 10% 0%,#29346a 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#174a66 0,transparent 34%),linear-gradient(135deg,#080e1b,#111a31 60%,#0a1221);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent)}
+.app{max-width:1440px;margin:auto;padding:24px;position:relative}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:25px}.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#9a8cff,#56d5e8);display:grid;place-items:center;color:#10172b;font-weight:900;font-size:20px;box-shadow:0 8px 28px #7066ff55}.brand h1{font-size:20px;letter-spacing:1.8px;margin:0}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:2px;margin-top:3px}.top-right{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(18px);padding:10px 14px;border-radius:999px;color:var(--muted);font-size:12px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:22px}.glass{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(28px) saturate(165%);-webkit-backdrop-filter:blur(28px) saturate(165%);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.12);border-radius:23px}.sidebar{padding:17px;height:fit-content;position:sticky;top:18px}.navlabel{font-size:10px;color:#8292ad;letter-spacing:2px;padding:12px 12px 8px}.nav{width:100%;text-align:left;color:#c6d2e7;background:transparent;border:0;padding:12px;border-radius:13px;font-size:13px;cursor:pointer;margin:2px 0}.nav.active,.nav:hover{background:linear-gradient(100deg,#8879ff35,#5ad8e522);color:white}.nav span{display:inline-block;width:25px}.side-note{margin:22px 5px 4px;padding:14px;border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:11px;line-height:1.6;background:#ffffff08}
+main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:end;margin:3px 2px 20px;gap:14px}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:2px;text-transform:uppercase}.welcome h2{font-size:28px;margin:7px 0 4px}.welcome p{color:var(--muted);margin:0;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:19px}.stat{padding:18px 20px}.stat .label{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:27px;margin-top:8px}.stat em{font-style:normal;color:var(--cyan);font-size:11px}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.75fr);gap:17px}.panel{padding:22px}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.panel h3{font-size:16px;margin:0}.sub{color:var(--muted);font-size:11px;margin-top:5px}.tag{font-size:10px;color:#c7c0ff;border:1px solid #9285ff55;background:#8879ff1c;padding:6px 9px;border-radius:999px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:11px;color:#c4d0e4}input,select,textarea{width:100%;border:1px solid var(--line);background:rgba(5,12,26,.55);color:var(--text);padding:12px 13px;border-radius:12px;outline:none;font:13px inherit}input:focus,select:focus,textarea:focus{border-color:#8b7cff;box-shadow:0 0 0 3px #8b7cff20}select option{background:#111b30;color:white}textarea{resize:vertical;min-height:90px}::placeholder{color:#7786a0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}.btn{border:1px solid var(--line);border-radius:12px;padding:11px 16px;background:#ffffff0c;color:white;font-weight:650;font-size:12px;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-1px);background:#ffffff18}.btn.primary{background:linear-gradient(110deg,#897aff,#5bbee0);border:0;color:#0a1326;box-shadow:0 8px 25px #716aff42}.btn.secondary{color:#c9c3ff;border-color:#8b7cff66}
+.tip{padding:17px;border-radius:17px;background:linear-gradient(145deg,#8879ff24,#5bd5e414);border:1px solid #9c91ff35;margin-bottom:14px}.tip strong{font-size:13px}.tip p{font-size:11px;line-height:1.65;color:var(--muted);margin:8px 0 0}.recent{padding:18px}.recent-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff12;gap:10px}.recent-item:last-child{border:0}.recent-item b{font-size:12px}.recent-item small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.empty{color:var(--muted);font-size:12px;line-height:1.6;padding:12px 0}
+.paper-wrap{margin-top:18px;display:none}.paper{position:relative;isolation:isolate;overflow:hidden;background:#fff;color:#172033;border-radius:15px;padding:34px;box-shadow:0 20px 55px #0005}.paper:before{content:"MOHD ARSH";position:absolute;z-index:0;top:42%;left:8%;width:84%;text-align:center;font-size:clamp(40px,8vw,92px);font-weight:900;letter-spacing:8px;color:rgba(90,105,140,.13);transform:rotate(-24deg);pointer-events:none;white-space:nowrap}.paper>*{position:relative;z-index:1}.watermark{position:fixed;right:18px;bottom:14px;z-index:10;padding:8px 13px;border:1px solid #ffffff35;border-radius:999px;background:rgba(255,255,255,.09);backdrop-filter:blur(18px);color:#eaf1ffb8;font-size:10px;letter-spacing:2px;pointer-events:none;box-shadow:0 8px 25px #0002}.paper-head{text-align:center;border-bottom:2px solid #172033;padding-bottom:15px;margin-bottom:18px}.paper-head h2{font-size:20px;margin:0 0 6px}.paper-head p{margin:4px;font-size:12px}.paper-meta{display:flex;justify-content:space-between;gap:12px;font-size:12px;margin:12px 0 20px}.q{margin:15px 0;font-size:13px;line-height:1.55}.q b{margin-right:7px}.q small{display:block;color:#555;margin-top:5px}.section-title{font-size:13px;font-weight:800;margin-top:22px;border-bottom:1px solid #bbb;padding-bottom:6px}.answer{color:#315c9a;font-size:11px;margin:4px 0 0 25px}.footer{color:#8090aa;text-align:center;font-size:10px;padding:24px 0 5px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:9px}.navlabel,.side-note{display:none}.nav{white-space:nowrap;width:auto}.content-grid{grid-template-columns:1fr}.top{align-items:flex-start}.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.app{padding:14px}.top-right .pill{display:none}.welcome{align-items:flex-start;flex-direction:column}.welcome h2{font-size:23px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:21px}.stat .label{font-size:10px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:16px}.paper{padding:20px}.paper-meta{font-size:10px}}
+@media print{body{background:white!important}.app>*:not(main),main>*:not(.paper-wrap){display:none!important}.layout{display:block}.paper-wrap{display:block!important;margin:0}.paper{box-shadow:none;border-radius:0;padding:10mm;print-color-adjust:exact;-webkit-print-color-adjust:exact}.paper:before{color:rgba(90,105,140,.16)!important}.paper-wrap .actions{display:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="logo">MA</div><div><h1>MOHD ARSH</h1><small>SMART QUESTION PAPER MAKER</small></div></div>
+ <div class="top-right"><div class="pill">✦ Liquid Glass Workspace</div><div class="pill">Offline-ready</div></div>
+</header>
+<div class="layout">
+ <aside class="sidebar glass">
+  <div class="navlabel">WORKSPACE</div>
+  <button class="nav active" onclick="showSection('generator',this)"><span>✧</span> Create Paper</button>
+  <button class="nav" onclick="showSection('history',this)"><span>◷</span> Paper History</button>
+  <button class="nav" onclick="showSection('guide',this)"><span>ⓘ</span> How it works</button>
+  <div class="side-note">Build a classroom-ready paper from your topics. Review and edit the questions before printing.</div>
+ </aside>
+ <main>
+  <section id="generator">
+   <div class="welcome"><div><div class="eyebrow">YOUR EXAM WORKSPACE</div><h2>Good to see you, Educator.</h2><p>Turn chapters and topics into a structured question paper.</p></div><span class="tag">✦ Paper Studio</span></div>
+   <div class="stats">
+    <div class="stat glass"><div class="label">Papers created</div><strong id="paperCount">0</strong><em>↑ This browser</em></div>
+    <div class="stat glass"><div class="label">Questions drafted</div><strong id="questionCount">0</strong><em>✦ Generated locally</em></div>
+    <div class="stat glass"><div class="label">Question formats</div><strong>04</strong><em>MCQ · Short · Long · Fill</em></div>
+   </div>
+   <div class="content-grid">
+    <div class="panel glass">
+     <div class="panel-head"><div><h3>Create a question paper</h3><div class="sub">Add your class, subject and topics</div></div><span class="tag">STEP 01 — DETAILS</span></div>
+     <div class="form-grid">
+      <div class="field"><label>School / Institute name</label><input id="school" placeholder="e.g. ABC Public School"></div>
+      <div class="field"><label>Exam name</label><input id="exam" placeholder="e.g. Half Yearly Examination" value="Practice Test"></div>
+      <div class="field"><label>Board / बोर्ड</label><select id="board" onchange="applyBoardLanguage()"><option value="UP">UP Board — हिन्दी</option><option value="CBSE">CBSE — English</option></select></div>
+      <div class="field"><label>Class</label><select id="class"><option value="">Select class</option><script>for(let i=1;i<=12;i++)document.write(`<option>Class ${i}</option>`)</script></select></div>
+      <div class="field"><label>Subject</label><select id="subject"><option value="">Select subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Hindi</option><option>Social Science</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>History</option><option>Geography</option><option>Civics</option><option>Computer Science</option><option>Economics</option><option>Sanskrit</option><option>Environmental Studies</option><option>Other</option></select></div>
+      <div class="field full"><label>Topics / Chapters (one per line or comma-separated)</label><textarea id="topics" placeholder="e.g. Photosynthesis&#10;Parts of a plant&#10;Food chain"></textarea></div>
+      <div class="field"><label>Difficulty level</label><select id="difficulty"><option>Mixed</option><option>Easy</option><option>Medium</option><option>Hard</option></select></div>
+      <div class="field"><label>Duration</label><select id="duration"><option>1 Hour</option><option>1.5 Hours</option><option>2 Hours</option><option>2.5 Hours</option><option>3 Hours</option></select></div>
+      <div class="field"><label>MCQ questions</label><input id="mcq" type="number" min="0" max="30" value="5"></div>
+      <div class="field"><label>Short answer questions</label><input id="short" type="number" min="0" max="30" value="5"></div>
+      <div class="field"><label>Long answer questions</label><input id="long" type="number" min="0" max="20" value="3"></div>
+      <div class="field"><label>Fill in the blanks</label><input id="fill" type="number" min="0" max="30" value="2"></div>
+      <div class="field"><label>Marks per MCQ</label><input id="mcqMarks" type="number" min="1" value="1"></div>
+      <div class="field"><label>Marks per short answer</label><input id="shortMarks" type="number" min="1" value="2"></div>
+      <div class="field"><label>Marks per long answer</label><input id="longMarks" type="number" min="1" value="5"></div>
+      <div class="field"><label>Marks per fill blank</label><input id="fillMarks" type="number" min="1" value="1"></div>
+     </div>
+     <div class="actions"><button class="btn primary" onclick="generatePaper()">✦ Generate Question Paper</button><button class="btn" onclick="resetForm()">Reset</button></div>
+    </div>
+    <div>
+     <div class="tip"><strong>✦ Smart paper builder</strong><p>Enter clear topic names. EXAMFORGE creates editable practice-question drafts using topic-based templates. Check subject facts and answer keys before using the paper in an exam.</p></div>
+     <div class="panel glass recent"><div class="panel-head"><div><h3>Recent papers</h3><div class="sub">Saved in this browser</div></div><span class="tag">HISTORY</span></div><div id="recentList" class="empty">Your generated papers will appear here.</div></div>
+    </div>
+   </div>
+   <div id="paperWrap" class="paper-wrap">
+    <div class="panel glass" style="margin-bottom:12px"><div class="panel-head"><div><h3>Your paper is ready</h3><div class="sub">Review the draft, then print or save as PDF.</div></div><span class="tag">GENERATED</span></div><div class="actions"><button class="btn primary" onclick="window.print()">⤓ Print / Save PDF</button><button class="btn secondary" onclick="toggleAnswers()">Show / Hide Answer Hints</button><button class="btn" onclick="copyPaper()">Copy paper text</button></div></div>
+    <div id="paper" class="paper"></div>
+   </div>
+  </section>
+  <section id="history" style="display:none"><div class="welcome"><div><div class="eyebrow">YOUR LIBRARY</div><h2>Paper History</h2><p>Previously created papers saved on this device.</p></div></div><div class="panel glass"><div id="historyList" class="empty">No papers saved yet.</div></div></section>
+  <section id="guide" style="display:none"><div class="welcome"><div><div class="eyebrow">QUICK GUIDE</div><h2>How EXAMFORGE works</h2><p>A simple workflow for building practice papers.</p></div></div><div class="panel glass"><h3>1. Add your details</h3><p class="sub">Choose class, subject, difficulty and exam duration. Enter one or more topics.</p><h3 style="margin-top:22px">2. Choose question formats</h3><p class="sub">Set the number of MCQs, short answers, long answers and fill-in-the-blanks.</p><h3 style="margin-top:22px">3. Generate and review</h3><p class="sub">The local question builder makes editable draft questions from topic-based templates. It does not use an AI service or internet connection.</p><h3 style="margin-top:22px">4. Print or save</h3><p class="sub">Use Print / Save PDF to save a clean copy. Review every question and answer hint before distributing.</p></div></section>
+  <div class="footer">MOHD ARSH © 2026 · Designed by MOHD ARSH</div>
+ </main>
+</div>
+</div>
+<div class="watermark">MOHD ARSH · QUESTION PAPER STUDIO</div>
+<script>
+const $=id=>document.getElementById(id);
+let currentQuestions=[],showHints=false;
+function showSection(id,btn){['generator','history','guide'].forEach(x=>$(x).style.display=x===id?'block':'none');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));btn.classList.add('active');if(id==='history')renderHistory()}
+function topicsList(){return $('topics').value.split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function pick(a,i){return a[i%a.length]}
+function applyBoardLanguage(){
+ const hindi=$('board').value==='UP';
+ document.documentElement.lang=hindi?'hi':'en';
+ $('topics').placeholder=hindi?'उदाहरण: प्रकाश संश्लेषण\nपौधे के भाग\nखाद्य श्रृंखला':'e.g. Photosynthesis\nParts of a plant\nFood chain';
+}
+function makeQuestions(topic,type,index,diff,subject){
+ const hindi=$('board').value==='UP';
+ const level=diff==='Mixed'?['Easy','Medium','Hard'][index%3]:diff;
+ const sets=hindi?{
+  mcq:[`“${topic}” का सही वर्णन कौन-सा है?`,`“${topic}” से संबंधित सही विकल्प चुनिए।`,`“${topic}” की मुख्य विशेषता क्या है?`],
+  short:[`“${topic}” को अपने शब्दों में परिभाषित कीजिए।`,`“${topic}” के कोई दो महत्वपूर्ण बिंदु लिखिए।`,`उदाहरण सहित “${topic}” का महत्व समझाइए।`,`“${topic}” से संबंधित मुख्य विचारों में अंतर स्पष्ट कीजिए।`],
+  long:[`उपयुक्त उदाहरणों सहित “${topic}” का विस्तार से वर्णन कीजिए। जहाँ आवश्यक हो, नामांकित चित्र बनाइए।`,`“${topic}” की प्रमुख विशेषताओं, महत्व और उपयोगों का वर्णन कीजिए।`,`“${topic}” पर चर्चा कीजिए और उत्तर को उचित शीर्षकों में व्यवस्थित कीजिए।`],
+  fill:[`“${topic}” का संबंध __________ से है।`,`“${topic}” के बारे में सीखी गई एक महत्वपूर्ण बात लिखिए: __________।`,`“${topic}” की एक प्रमुख विशेषता __________ है।`]
+ }:{
+  mcq:[`Which statement best describes “${topic}”?`,`Which of the following is most closely related to “${topic}”?`,`Choose the correct statement about “${topic}”.`],
+  short:[`Define “${topic}” in your own words.`,`Write any two important points about “${topic}”.`,`Explain the importance of “${topic}” with one example.`,`Differentiate between the main ideas related to “${topic}”.`],
+  long:[`Explain “${topic}” in detail with suitable examples and a labelled diagram wherever relevant.`,`Describe the key features, importance and applications of “${topic}”.`,`Discuss “${topic}” and organize your answer under suitable headings.`],
+  fill:[`The term “${topic}” is related to __________.`,`Write one key fact you have learned about “${topic}”: __________.`,`An important feature of “${topic}” is __________.`]
+ };
+ const q=pick(sets[type],index);
+ const opts=hindi?[`क. ${topic}`,`ख. असंबंधित अवधारणा`,`ग. इनमें से कोई नहीं`,`घ. उपरोक्त सभी कथन गलत हैं`]:[`A. ${topic}`,`B. An unrelated concept`,`C. None of these`,`D. All statements are incorrect`];
+ const hint=hindi?`“${topic}” की परिभाषा और मुख्य विशेषताओं को दोहराइए।`:`Review the definition and key features of ${topic}.`;
+ if(type==='mcq')return {type,q,opts,hint,level};
+ return {type,q,hint:hindi?`“${topic}” के लिए अपनी पाठ्यपुस्तक और कक्षा के नोट्स का उपयोग कीजिए।`:`Use your textbook notes on ${topic} to prepare the answer.`,level};
+}
+function generatePaper(){
+ const topics=topicsList(),cls=$('class').value,sub=$('subject').value, hindi=$('board').value==='UP';
+ if(!cls||!sub||!topics.length){alert('Please select a class, subject and enter at least one topic.');return}
+ const counts={mcq:+$('mcq').value||0,short:+$('short').value||0,long:+$('long').value||0,fill:+$('fill').value||0};
+ if(Object.values(counts).every(x=>x===0)){alert('Please add at least one question.');return}
+ const marks={mcq:+$('mcqMarks').value||1,short:+$('shortMarks').value||2,long:+$('longMarks').value||5,fill:+$('fillMarks').value||1};
+ currentQuestions=[];let total=0,idx=0;
+ Object.entries(counts).forEach(([type,count])=>{for(let i=0;i<count;i++){let q=makeQuestions(pick(topics,idx),type,i,$('difficulty').value,sub);q.marks=marks[type];q.topic=pick(topics,idx);currentQuestions.push(q);total+=q.marks;idx++}});
+ const school=$('school').value.trim()||'School / Institute',exam=$('exam').value.trim()||'Question Paper';
+ let sections=hindi?{mcq:'खंड अ — बहुविकल्पीय प्रश्न',short:'खंड ब — लघु उत्तरीय प्रश्न',long:'खंड स — दीर्घ उत्तरीय प्रश्न',fill:'खंड द — रिक्त स्थान भरिए'}:{mcq:'SECTION A — MULTIPLE CHOICE QUESTIONS',short:'SECTION B — SHORT ANSWER QUESTIONS',long:'SECTION C — LONG ANSWER QUESTIONS',fill:'SECTION D — FILL IN THE BLANKS'};
+ let html=`<div class="paper-head"><h2>${escapeHtml(school)}</h2><p><b>${escapeHtml(exam)}</b></p><p>${escapeHtml($('board').value==='UP'?'UP Board — उत्तर प्रदेश माध्यमिक शिक्षा परिषद':'CBSE — Central Board of Secondary Education')} · ${escapeHtml(cls)} · ${escapeHtml(sub)}</p></div><div class="paper-meta"><span>${hindi?'समय':'Time'}: ${escapeHtml($('duration').value)}</span><b>${hindi?'पूर्णांक':'Maximum Marks'}: ${total}</b></div><p style="font-size:12px"><b>${hindi?'सामान्य निर्देश:':'General Instructions:'}</b> ${hindi?'सभी प्रश्नों को ध्यानपूर्वक पढ़िए। सभी प्रश्नों के उत्तर दीजिए। प्रत्येक प्रश्न के अंक साथ में दिए गए हैं।':'Read all questions carefully. Answer all questions. Marks are indicated against each question.'}</p>`;
+ let number=0;
+ Object.keys(sections).forEach(type=>{let qs=currentQuestions.filter(q=>q.type===type);if(!qs.length)return;html+=`<div class="section-title">${sections[type]}</div>`;qs.forEach(q=>{number++;html+=`<div class="q"><b>${number}.</b>${escapeHtml(q.q)} <b>[${q.marks}]</b>${q.opts?`<div style="margin:7px 0 0 24px">${q.opts.map(escapeHtml).join('<br>')}</div>`:''}<div class="answer hint" style="display:${showHints?'block':'none'}">Hint: ${escapeHtml(q.hint)}</div></div>`})});
+ html+=`<p style="text-align:center;margin-top:30px;font-size:11px">${hindi?'— प्रश्नपत्र समाप्त —':'— End of Question Paper —'}</p><p style="text-align:center;font-size:10px;letter-spacing:2px;color:#77809a">MOHD ARSH</p>`;
+ $('paper').innerHTML=html;$('paperWrap').style.display='block';$('questionCount').textContent=+$('questionCount').textContent+currentQuestions.length;
+ const item={id:Date.now(),title:`${cls} ${sub} — ${exam}`,date:new Date().toLocaleString(),count:currentQuestions.length,html};let hist=JSON.parse(localStorage.getItem('examforgeHistory')||'[]');hist.unshift(item);hist=hist.slice(0,30);localStorage.setItem('examforgeHistory',JSON.stringify(hist));$('paperCount').textContent=hist.length;renderRecent();$('paperWrap').scrollIntoView({behavior:'smooth'});
+}
+function toggleAnswers(){showHints=!showHints;document.querySelectorAll('.hint').forEach(x=>x.style.display=showHints?'block':'none')}
+function resetForm(){['school','topics'].forEach(id=>$(id).value='');$('class').value='';$('subject').value='';$('paperWrap').style.display='none'}
+function getHistory(){return JSON.parse(localStorage.getItem('examforgeHistory')||'[]')}
+function renderRecent(){let h=getHistory();$('recentList').innerHTML=h.length?h.slice(0,4).map(x=>`<div class="recent-item"><div><b>${escapeHtml(x.title)}</b><small>${escapeHtml(x.date)} · ${x.count} questions</small></div><button class="btn" onclick="loadPaper(${x.id})">Open</button></div>`).join(''):'Your generated papers will appear here.'}
+function renderHistory(){let h=getHistory();$('historyList').innerHTML=h.length?h.map(x=>`<div class="recent-item"><div><b>${escapeHtml(x.title)}</b><small>${escapeHtml(x.date)} · ${x.count} questions</small></div><button class="btn" onclick="loadPaper(${x.id})">Open paper</button></div>`).join(''):'No papers saved yet.'}
+function loadPaper(id){let item=getHistory().find(x=>x.id===id);if(!item)return;$('paper').innerHTML=item.html;$('paperWrap').style.display='block';$('generator').style.display='block';$('history').style.display='none';document.querySelectorAll('.nav').forEach((n,i)=>n.classList.toggle('active',i===0));$('paperWrap').scrollIntoView({behavior:'smooth'})}
+function copyPaper(){let txt=$('paper').innerText;navigator.clipboard?.writeText(txt).then(()=>alert('Paper text copied.')).catch(()=>alert('Copy is not available in this browser.'))}
+$('paperCount').textContent=getHistory().length;renderRecent();applyBoardLanguage();
+</script>
+</body>
+</html>
